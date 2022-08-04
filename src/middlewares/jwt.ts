@@ -6,7 +6,7 @@ import { Request, Response, NextFunction } from '../interfaces';
 export const authenticateToken = (req: any, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
-
+  
   if (token == null) return res.sendStatus(401)
 
   jwt.verify(token, APP_VAR.tokenSecret as string, (err: any, user: any) => {
@@ -21,5 +21,7 @@ export const authenticateToken = (req: any, res: Response, next: NextFunction) =
 }
 
 export const generateAccessToken = (email: string) => {
-  return jwt.sign(email, APP_VAR.tokenSecret, { expiresIn: '1800s' });
+    return jwt.sign({
+        data: email
+    }, APP_VAR.tokenSecret, { expiresIn: 60 * 60 });
 }

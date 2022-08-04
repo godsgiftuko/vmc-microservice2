@@ -4,9 +4,7 @@
   "description": "A simple user authentication app",
   "main": "main.ts",
   "scripts": {
-    "dev": " ts-node-dev --respawn src/server",
-    "build": "rm -rf dist && tsc",
-    "start": "node dist/src/server.js"
+    "start": "ts-node-dev --respawn src/server"
   },
   "repository": "https://github.com/godsgiftuko/vmc-microservice.git",
   "author": "Uko, God'sgift Matthew",

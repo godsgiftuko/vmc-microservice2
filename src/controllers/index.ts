@@ -3,7 +3,7 @@ import { addUser } from '../models';
 import { writeValueToJSON, readValueFromJSON } from '../utils/FsOperations';
 import { randomUUID } from 'crypto';
 import { generateAccessToken } from '../middlewares/jwt';
-import { getQuote } from '../services/quotes';
+import { getQuotes } from '../services/quotes';
 
 
 const createUser: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
@@ -75,17 +75,30 @@ const loginUser: RequestHandler = async (req: Request, res: Response, next: Next
             data: null
         });
     }
-    const quote = await getQuote();
     const token = generateAccessToken(userEmail);
     res.status(404).send({
         message: "SUCCESS",
         data: {
             token,
-            quote
         }
     });
 
-    console.log(token);
 }
 
-export { createUser, loginUser }
+const getUserAQuote: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
+    const quotes = await getQuotes();
+    console.log(quotes);
+    
+    if (quotes) {
+        const oneQuote = quotes[Math.random() * quotes.length]; 
+        res.status(200).send({
+            message: "SUCCESS",
+            data: {
+                quotes
+            }
+        });
+    }
+
+}
+
+export { createUser, loginUser, getUserAQuote }

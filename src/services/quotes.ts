@@ -4,7 +4,7 @@ import { SERVICE_URIS } from "../configs";
 const quoteURI = SERVICE_URIS.quoteURI;
 const quoteAPI = request(quoteURI);
 
-export const getQuote = async () => {
+export const getQuotes = async () => {
     try {
         return await (await quoteAPI.get(quoteURI)).data;
     } catch (error) {

@@ -33,7 +33,7 @@ const httpServer = () => {
     app.get("/ping", (req: Request, res: Response, next: NextFunction) => res.status(200).json({ message: "Pong!" }));
 
     // ROUTES
-    app.use("/api/user", userRoutes(router));
+    app.use("/api", userRoutes(router));
     // HANDLE NOT FOUND ROUTES
     app.use((req: Request, res: Response, next: NextFunction) => {
         const error = new Error("Not found");

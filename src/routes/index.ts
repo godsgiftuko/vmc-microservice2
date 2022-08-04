@@ -1,10 +1,11 @@
 import { IRouter } from '../interfaces';
-import { loginUser, createUser } from '../controllers';
+import { loginUser, createUser, getUserAQuote } from '../controllers';
 import { authenticateToken } from '../middlewares/jwt';
 
-export default function Public(router: IRouter) {
-    router.post('/register', createUser);
-    router.post('/login', authenticateToken, loginUser);
+export default function user(router: IRouter) {
+    router.post('/auth/register', createUser);
+    router.post('/auth/login', loginUser);
+    router.get('/user/quote', authenticateToken, getUserAQuote);
 
     return router;
 }
